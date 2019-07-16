@@ -1,0 +1,71 @@
+package com.epasskorea.groupware.config;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.epasskorea.groupware"})
+@PropertySource(value = { "classpath:application.properties" })
+public class WebMvcConfig implements WebMvcConfigurer {
+ 
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+    private ApplicationContext applicationContext;
+
+
+	@Bean
+    public InternalResourceViewResolver resolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+	}
+
+	@Bean
+    public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty("datasource.jdbc.lms.driver"));
+        dataSource.setUrl(env.getRequiredProperty("datasource.jdbc.lms.url"));
+        dataSource.setUsername(env.getRequiredProperty("datasource.jdbc.lms.username"));
+        dataSource.setPassword(env.getRequiredProperty("datasource.jdbc.lms.password"));
+        return dataSource;
+	}
+
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource());
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mapper/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/HomeMapper.xml"));
+        
+        return sqlSessionFactoryBean.getObject();
+	}    
+	    
+    @Bean
+    public SqlSession sqlSession() throws Exception {
+        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+        return sqlSessionTemplate;
+    }
+
+
+}

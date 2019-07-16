@@ -1,0 +1,37 @@
+package com.epasskorea.groupware.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.epasskorea.groupware.config.AppInitializer;
+import com.epasskorea.groupware.domain.Member;
+import com.epasskorea.groupware.service.MemberService;
+
+@RestController
+public class HomeController {
+ 
+	@Resource(name="memberService")
+	private MemberService memberService;
+	
+	@GetMapping("/")
+    public String welcome() {
+	
+		List<Map<String,Object>> members = memberService.findAll();
+	    System.out.println("2222222222:"+members);
+
+	    return "Welcome to RestTemplate Example.";
+    }
+  
+ 
+}

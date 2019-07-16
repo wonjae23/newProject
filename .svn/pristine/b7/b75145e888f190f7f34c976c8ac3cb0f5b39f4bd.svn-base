@@ -1,0 +1,51 @@
+package com.epasskorea.groupware.controller;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
+
+@Controller
+public class GroupWareCommonController {
+	
+	/**
+	 * Description : 로그인
+	 * @throws Exception
+	 * @param 
+	 * @return ModelAndView
+	 */	
+	@RequestMapping(value="/login.do")
+	public ModelAndView goLogin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> commandMap) throws Exception{				
+	
+		ModelAndView mav = new ModelAndView();
+		    
+		String loginId = "";
+		String loginPwd = "";
+		String checkplusYN = "";  // 본인인증 
+		
+		//FlashMap에 저장되어 전달된 값을 가져온다.  
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);  
+		if(flashMap !=null) {  
+			loginId = (String)flashMap.get("loginId");
+			loginPwd = (String)flashMap.get("loginPwd");
+			checkplusYN = (String)flashMap.get("checkplusYN"); 
+		}
+		
+		if ("Y".equals(checkplusYN)) {
+			//String sEncData = startCheckplus(request, response, commandMap);	
+
+			mav.addObject("checkplusYN", checkplusYN);
+		    mav.addObject("loginId",loginId);
+		    mav.addObject("loginPwd",loginPwd);
+	//	    mav.addObject("sEncData",sEncData);
+		}
+
+		mav.setViewName("login");
+		return mav;
+	}
+}

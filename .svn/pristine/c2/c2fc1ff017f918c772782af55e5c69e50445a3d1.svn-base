@@ -1,0 +1,11 @@
+package com.epasskorea.groupware.config;
+
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+/*web.xml에서 springSecurityFilterChain 을 설정하던 부분*/
+public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer
+{
+	 public SpringSecurityInitializer() {
+		  super(SecurityConfig.class);
+		   }
+}

@@ -1,0 +1,30 @@
+package com.epasskorea.groupware.domain;
+
+public class Member {
+	
+	String MB_NAME;
+    String MB_ID;
+    
+    public Member() {
+    	
+    }
+    
+    public Member(String MB_NAME, String MB_ID) {
+        this.MB_NAME = MB_NAME;
+        this.MB_NAME = MB_ID;
+    }
+ 
+    public String getName() {
+        return MB_NAME;
+    }
+ 
+    public String getText() {
+        return MB_ID;
+    }
+
+	@Override
+	public String toString() {
+		return "Member [MB_NAME=" + MB_NAME + ", MB_ID=" + MB_ID + "]";
+	}
+    
+}

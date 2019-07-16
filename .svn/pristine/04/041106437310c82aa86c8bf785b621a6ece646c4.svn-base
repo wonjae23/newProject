@@ -1,0 +1,23 @@
+package com.epasskorea.groupware.advisor;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+
+@Aspect
+@Component
+public class testAdvisor {
+
+	@Pointcut("execution(* com.epasskorea.groupware.controller.HomeController.aopTestMethod(..))")
+	public void testAdvisorMethod() {}
+	@Before(value="testAdvisorMethod()")
+	public void beforeTarget(JoinPoint joinPoint) throws Exception {
+		System.out.println("##BeforeAdvisor이 실행됨");
+	}
+	
+	
+	
+}

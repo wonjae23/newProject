@@ -1,0 +1,33 @@
+package com.epasskorea.groupware.advisor;
+
+import java.lang.reflect.Method;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
+
+import com.epasskorea.groupware.annotation.AuthCheck;
+
+@Aspect
+@Component
+public class authCheckAdvisor {
+
+	@Pointcut(value ="@annotation(com.epasskorea.groupware.annotation.AuthCheck)")	
+	public void authCheckVal() {}
+	
+	@Before(value="authCheckVal()")
+	public void beforeTarget(JoinPoint joinPoint) throws Exception {
+		MethodSignature method = (MethodSignature) joinPoint.getSignature();
+		
+	    Method theMethod = ClassUtils.getMethodIfAvailable(joinPoint.getTarget().getClass(), 
+	    												   method.getMethod().getName(), 
+	    												   method.getParameterTypes());
+	    
+	    AuthCheck authCheck = theMethod.getAnnotation(com.epasskorea.groupware.annotation.AuthCheck.class);
+	    System.out.println("#### authCheck : " + authCheck.checkAuth());   
+	}
+}

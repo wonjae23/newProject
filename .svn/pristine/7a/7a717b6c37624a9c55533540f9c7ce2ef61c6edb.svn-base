@@ -1,0 +1,108 @@
+package com.epasskorea.groupware.auth;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import com.epasskorea.groupware.service.MemberService;
+
+@Component
+public class AuthProvider implements AuthenticationProvider {
+
+	
+	@Resource(name="memberService")
+	private MemberService memberService;
+
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean supports(Class<?> authentication) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+   /* @Autowired
+    AuthorizationService authorizationService; */
+
+    //로그인 버튼을 누를 경우
+    //실행 1
+    //@Override
+    /*public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    	System.out.println("000000000000");
+        String id = authentication.getName();
+        String password = authentication.getCredentials().toString();
+        
+        System.out.println("11111111:"+id);
+        System.out.println("2222222222:"+password);
+        return authenticate(id, password);
+
+    }
+    //실행 2
+    
+    public Authentication authenticate(String id, String password) throws AuthenticationException {
+    	System.out.println("33333333333");
+       User user = authorizationService.login(id, password);
+        if (user == null) return null;
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
+        String role = "";
+       
+        switch (user.getU_type()) {
+            case 0:
+                role = "ROLE_NO";
+                break;
+            case 1:
+                role = "ROLE_USER";
+                break;
+            case 2:
+            case 3:
+            case 4:
+                role = "ROLE_ADMIN";
+                break;
+        }
+        grantedAuthorityList.add(new SimpleGrantedAuthority(role));
+        return new MyAuthenticaion(id, password, grantedAuthorityList, user);
+		return null;
+	
+    }*/
+    
+    /*public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+      UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication; //유저가 입력한 정보를 이이디비번으으로만든다.(로그인한 유저아이디비번정보를담는다)
+
+      List<Map<String,Object>> userInfo = memberService.findAll(authToken.getName()); //UserDetailsService에서 유저정보를 불러온다.
+      
+      if (userInfo == null) {
+        throw new UsernameNotFoundException(authToken.getName());
+      }
+
+      if (!matchPassword(userInfo.get("MB_SHAPWD"), authToken.getCredentials())) {
+        throw new BadCredentialsException("not matching username or password");
+      }
+
+      List<GrantedAuthority> authorities = (List<GrantedAuthority>) userInfo.getAuthorities();
+
+      return new UsernamePasswordAuthenticationToken(userInfo,null,authorities);
+    }
+
+    private boolean matchPassword(String password, Object credentials) {
+        return password.equals(credentials);
+      }
+    
+    @Override
+    public boolean supports(Class<?> authentication) {
+      return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+    }*/
+}

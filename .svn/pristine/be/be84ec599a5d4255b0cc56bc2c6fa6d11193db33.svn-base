@@ -1,0 +1,7 @@
+datasource.jdbc.lms.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+#datasource.jdbc.lms.url=jdbc:sqlserver://114.141.28.237:14333;SelectMethod=cursor;DatabaseName=EPKDB_B2B
+#datasource.jdbc.lms.username=b2b_user
+#datasource.jdbc.lms.password=b2bdbuserP
+datasource.jdbc.lms.url=jdbc:sqlserver://114.141.28.222:14333;SelectMethod=cursor;DatabaseName=EPKDB_B2B
+datasource.jdbc.lms.username=devdbuser
+datasource.jdbc.lms.password=epkdevdbuser

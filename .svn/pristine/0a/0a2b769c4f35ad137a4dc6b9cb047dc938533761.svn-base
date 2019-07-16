@@ -1,0 +1,126 @@
+package com.epasskorea.groupware.config;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.epasskorea.groupware"})
+@PropertySource(value = { "classpath:application.properties" })
+public class WebMvcConfig implements WebMvcConfigurer, WebApplicationInitializer {
+ 
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+    private ApplicationContext applicationContext;	
+	
+
+	@Bean
+    public InternalResourceViewResolver resolver() {
+		System.out.println("리졸버뷰어");
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+	}
+
+	
+	@Bean
+    public DataSource dataSource() {
+		System.out.println("데이터소스");
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty("datasource.jdbc.lms.driver"));
+        dataSource.setUrl(env.getRequiredProperty("datasource.jdbc.lms.url"));
+        dataSource.setUsername(env.getRequiredProperty("datasource.jdbc.lms.username"));
+        dataSource.setPassword(env.getRequiredProperty("datasource.jdbc.lms.password"));
+        return dataSource;
+	}
+
+	@Bean
+	public SqlSessionFactory sqlSessionFactory() throws Exception {
+		System.out.println("세션팩토리");
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource());
+        //sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mapper/mybatis-config.xml"));
+       sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/HomeMapper.xml"));
+      
+        return sqlSessionFactoryBean.getObject();
+	}    
+	    
+    @Bean
+    public SqlSession sqlSession() throws Exception {
+    	System.out.println("세션");
+        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+        return sqlSessionTemplate;
+    }
+    
+    public void addInterceptors(InterceptorRegistry registry,ServletContext servletContext) {
+    	System.out.println("인터셉터");
+    	//registry.addInterceptor(new DomainInterceptor())
+    	//registry.addInterceptor(new ThemeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
+    	//registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
+    }
+    
+     @Override
+     
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {  
+    	System.out.println("아큐먼트리졸버");
+    	argumentResolvers.add(new HeaderMapArgumentResolver());
+    }
+ 
+   
+    
+     @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+    	System.out.println("메시지컨버터");
+    	StringHttpMessageConverter sk =new StringHttpMessageConverter();
+    	sk.setSupportedMediaTypes(Arrays.asList(new MediaType("text","UTF-8")));    	
+    	
+    /*  Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
+        .indentOutput(true)
+        .dateFormat(new SimpleDateFormat("yyyy-MM-dd"))
+        .modulesToInstall(new ParameterNamesModule());
+      converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
+      converters.add(new MappingJackson2XmlHttpMessageConverter(builder.xml().build()));
+    */
+    }
+     @Override
+ 	public void onStartup(ServletContext servletContext) throws ServletException {
+ 		  FilterRegistration.Dynamic filter 
+ 		  = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
+ 		          filter.setInitParameter("encoding", "UTF-8");
+ 		          filter.addMappingForServletNames(null, false, "dispatcher");
+ 	}
+     
+}

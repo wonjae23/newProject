@@ -1,0 +1,11 @@
+package com.epasskorea.groupware.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.epasskorea.groupware.config.EpkMap;
+
+public interface MemberService {
+	
+	 public List<Map<String,Object>> findAll(Map<String, Object> commandMap);
+}

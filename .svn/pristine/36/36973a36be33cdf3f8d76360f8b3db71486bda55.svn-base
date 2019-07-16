@@ -1,0 +1,105 @@
+package com.epasskorea.groupware.config;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.epasskorea.groupware.auth.AuthProvider;
+
+
+
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	/*@Autowired
+    AuthProvider authProvider;*/
+	
+	/*JSP의 리소스 파일이나 자바스크립트 파일이 저장된 경로는 무시를 한다*/
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	    web.ignoring().antMatchers("/res/**");
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+        .antMatchers("/user/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/admin/**").hasRole("ADMIN")
+        .and()
+        .formLogin().loginPage("/login").failureUrl("/error").defaultSuccessUrl("/admin", true)
+        .usernameParameter("username").passwordParameter("password")
+        .and()
+        .csrf().disable();
+		
+		//http.authenticationProvider(authProvider);
+	}
+
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+	        .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+	        .and()
+	        .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
+		  
+		 /* .jdbcAuthentication()
+		  .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+		  .authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username = ?")
+		  .dataSource(dataSource);*/
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	  
+	
+	/*@Autowired
+    AuthProvider authProvider;
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/res/**");
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+    	System.out.println("시큐리티");
+        http.authorizeRequests()
+                .antMatchers("/user/**").access("ROLE_USER")
+                .antMatchers("/admin/**").access("ROLE_ADMIN")
+                .antMatchers("/", "/login.do", "/login-error").permitAll()
+                .antMatchers("/**").authenticated();
+
+        http.csrf().disable();
+
+        http.formLogin()
+                .loginPage("/login.do")
+                .loginProcessingUrl("/login-processing")
+                .failureUrl("/login-error")
+                .defaultSuccessUrl("/home", true)
+                .usernameParameter("id")
+                .passwordParameter("password");
+
+        http.logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
+
+       http.authenticationProvider(authProvider);
+    }*/
+
+
+
+}

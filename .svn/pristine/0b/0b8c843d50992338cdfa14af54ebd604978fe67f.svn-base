@@ -1,0 +1,83 @@
+package com.epasskorea.groupware.controller;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class GroupWareCommonController {
+	
+	/**
+	 * Description : 로그인
+	 * @throws Exception
+	 * @param 
+	 * @return ModelAndView
+	 */	
+	/*
+	@RequestMapping(value="/login.do")
+	public ModelAndView goLogin(HttpServletRequest request, HttpServletResponse response, Map<String, Object> commandMap) throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		 
+		String loginId = "";
+		String loginPwd = "";
+		String checkplusYN = "";  // 본인인증 
+		
+		//FlashMap에 저장되어 전달된 값을 가져온다.  
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);  
+		if(flashMap !=null) {  
+			loginId = (String)flashMap.get("loginId");
+			loginPwd = (String)flashMap.get("loginPwd");
+			checkplusYN = (String)flashMap.get("checkplusYN"); 
+		}
+		
+		if ("Y".equals(checkplusYN)) {
+			//String sEncData = startCheckplus(request, response, commandMap);	
+
+			mav.addObject("checkplusYN", checkplusYN);
+		    mav.addObject("loginId",loginId);
+		    mav.addObject("loginPwd",loginPwd);
+	//	    mav.addObject("sEncData",sEncData);
+		}
+
+		mav.setViewName("login");
+		return mav;
+	}*/
+	
+	 @RequestMapping("/admin")
+	    public String goAdmin()
+	    {
+	        return "admin";
+	    }
+	    
+	    @RequestMapping("/user")
+	    public String goUser()
+	    {
+	        return "user";
+	    }
+
+	    @RequestMapping("/error")
+	    public String error(ModelMap model)
+	    {
+	        model.addAttribute("error", "true");
+	        return "login";
+	    }
+
+	    @RequestMapping("/login")
+	    public String login()
+	    {
+	        return "login";
+	    }
+	    
+	    @RequestMapping("/logout")
+	    public String logout(ModelMap model)
+	    {
+	        Authentication authentication = SecurityContextHolder.getContext()
+	                .getAuthentication();
+	        authentication.setAuthenticated(false);
+	        
+	        return "login";
+	    }
+}
