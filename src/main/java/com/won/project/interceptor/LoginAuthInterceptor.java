@@ -1,5 +1,7 @@
 package com.won.project.interceptor;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.won.project.common.MessageViewer;
 
 /**
  * Class Name : LoginAuthInterceptor
@@ -30,20 +34,20 @@ public class LoginAuthInterceptor implements HandlerInterceptor  {
 		String reqUrl = String.valueOf(request.getRequestURL());
 		log.debug("## [LoginAuthInterceptor preHandle] reqUrl =>" + reqUrl);
 		
-		if( reqUrl.indexOf("/apotest.epk")>-1 || reqUrl.indexOf("/login.do")>-1 || reqUrl.indexOf("/loginOk.do")>-1 || reqUrl.indexOf("mo/interface.do")>-1 || reqUrl.indexOf("/checkplus/process.do")>-1 || reqUrl.indexOf("/checkplus/error.do")>-1){	
+		if( reqUrl.indexOf("/main/login")>-1  || reqUrl.indexOf("/main/loginOk")>-1 ){	
 			return true;
 		}
 
-		/*Map<String,String> loginSession = (Map<String,String>)request.getSession().getAttribute("OperatorSession");
+		Map<String,String> loginSession = (Map<String,String>)request.getSession().getAttribute("OperatorSession");
 		
 		if(loginSession == null){
-			MessageViewer.alert(response, "loginagain", "loginagain", "/login.do", false, false, false, "");
+			MessageViewer.alert(response, "페이지이동", "로그인 화면으로 이동", "/main/login", false, false, false, "");
 			return false;
 		}else{
 		   	return true;
-		}*/
+		}
 		
-		return true;
+		//return true;
     }
 
 	@Override

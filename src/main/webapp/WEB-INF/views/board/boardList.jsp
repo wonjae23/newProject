@@ -96,6 +96,10 @@
         </style>
     </head>
     <body>
+    	<%@ include file="/WEB-INF/views/common/loginStatus.jsp"%>
+    	<c:if test="${msg == 'success' }">
+    		<h2>${sessionScope.userName} (${sessionScope.userId})님 환영합니다.</h2>
+    	</c:if>
         <form class="form-inline" id="frmSearch" action="/board/list">
             <input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
             <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->

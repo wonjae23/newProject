@@ -12,13 +12,12 @@
 <%@ page import="com.won.project.util.SessionUtil"%>
 <%@ include file="/WEB-INF/views/common/jstl_taglib.jsp" %>
 
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="ko">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>won project</title>
+	<title>이패스코리아 GroupWare</title>
 	<link rel="stylesheet" href="/common/css/admin.css" type="text/css" />  <!-- admin basic css -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> <!-- jquery ui css -->
 		

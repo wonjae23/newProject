@@ -6,14 +6,19 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.won.project.config.EpkMap;
+import com.won.project.domain.MemberVO;
 import com.won.project.service.sample.MemberService;
 
 /*@RestController*/
@@ -25,7 +30,7 @@ public class MainController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping("/index.do")
+	@RequestMapping("/index")
     public ModelAndView calendar(HttpServletRequest request, HttpServletResponse response,  EpkMap commandMap) {
 		ModelAndView mv = new ModelAndView();
 		String kk = (String) commandMap.get("name");
@@ -40,6 +45,35 @@ public class MainController {
     }
 	
 	
+	//로그인 화면으로 이동
+    @RequestMapping(value = "/main/login")
+    public String boardView(@RequestParam Map<String, Object> paramMap, Model model) {
+        return "/main/login";
+    }
+    
+    @RequestMapping("/main/loginCheck")
+    public ModelAndView loginCheck(@ModelAttribute MemberVO vo, HttpSession session) {
+    	boolean result = memberService.loginCheck(vo, session);
+    	ModelAndView mav = new ModelAndView();
+    	
+    	if(result == true) {
+    		mav.setViewName("/board/boardlist");
+    		mav.addObject("msg","success");
+    	}else {
+    		mav.setViewName("/main/login");
+    		mav.addObject("msg","failure");
+    	}
+    	return mav;
+    }
 	
- 
+    @RequestMapping("/main/logout")
+    public ModelAndView logout(HttpSession session) {
+    	memberService.logout(session);
+    	ModelAndView mav = new ModelAndView();
+    	
+    	mav.setViewName("/main/login");
+    	mav.addObject("msg","logout");
+    	
+    	return mav;
+    }
 }

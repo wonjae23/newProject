@@ -18,7 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.web.WebApplicationInitializer;
@@ -26,6 +25,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -33,6 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.won.project.interceptor.LoginAuthInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -66,14 +67,14 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
     	registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");*/
     //}
     
-     @Override 
+    @Override 
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {  
     	argumentResolvers.add(new HeaderMapArgumentResolver());
     }
  
    
     
-     @Override
+    @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
     	StringHttpMessageConverter sk =new StringHttpMessageConverter();
     	sk.setSupportedMediaTypes(Arrays.asList(new MediaType("text","UTF-8")));    	
