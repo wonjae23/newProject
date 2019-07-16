@@ -1,0 +1,78 @@
+body {font-size:12px; font-family:±º∏≤,tahoma,verdana; line-height:150%; color:#636363;} 
+img{border:none}
+
+a:link    {color:#636363;text-decoration:none}
+a:active  {color:#636363;text-decoration:none}
+a:visited {color:#636363;text-decoration:none}
+a:hover   {color:#ec850e;text-decoration:none}
+
+table {font-size:12px; font-family:±º∏≤,verdana; line-height:130%; color:#636363}
+
+textarea {font-size:12px; font-family:±º∏≤,tahoma,verdana; line-height:130%; color:#636363; padding: 5px 5px;
+          background-color:#FFFFFF; border:1px solid #DEDEDE;
+		  border-left-color:#DEDEDE; border-right-color:#DEDEDE; border-top-color:#DEDEDE; border-bottom-color:#DEDEDE}
+		  
+.tchmsg_textarea {font-size:11px; font-family:µ∏øÚ,±º∏≤,tahoma,verdana; line-height:130%; color:#e3eff3; padding: 0px;
+          background-color:transparent; border:0px solid #DEDEDE; filter:chroma(color=000000);scrollbar-face-color:#4c5051;
+        
+		  }					  	  
+.input {font-size:12px; font-family:±º∏≤,tahoma,verdana; color:#FFFFFF; 
+        background-color:#666666;
+		border-left:1px solid #949494;
+		border-right:1px solid #949494;
+		border-top:1px solid #949494;
+		border-bottom:1px solid #949494;
+		height:17px}
+		
+.input230 {font-size:12px; font-family:±º∏≤,tahoma,verdana; color:#636363; 
+        background-color:#FFFFFF;
+		border-left:2px solid #f7b167;
+		border-right:2px solid #f7b167;
+		border-top:2px solid #f7b167;
+		border-bottom:2px solid #f7b167;
+		width:230px;
+		height:24px}
+		
+.input_s {font-size:11px; font-family:±º∏≤,tahoma,verdana; color:#636363;text-align: right;
+        background-color:#FFFFFF;
+		border-left:1px solid #cacaca;
+		border-right:1px solid #cacaca;
+		border-top:1px solid #cacaca;
+		border-bottom:1px solid #cacaca;
+		height:18px}
+		
+body {  scrollbar-face-color:#e3e3e3;
+        scrollbar-shadow-color:#FFFFFF;
+		scrollbar-highlight-color:#FFFFFF;
+		scrollbar-3dlight-color:#CCCCCC;
+		scrollbar-darkshadow-color:#CCCCCC;
+		scrollbar-track-color:#FFFFFF;
+		scrollbar-arrow-color:#CCCCCC
+		}
+				
+
+
+/* ∞£∞› ¡Ÿ¿Ã±‚ */
+.spacing {letter-spacing: -1px}
+
+
+/* ≈ÿΩ∫∆Æ_¿€¿∫º≥∏Ì */
+.stext {font-size:11px; font-family:µ∏øÚ,±º∏≤,verdana; line-height:130%; color:#636363}
+
+/* »≠¿Ã∆Æ_≈ÿΩ∫∆Æ_¿€¿∫º≥∏Ì */
+.w_stext {font-size:11px; font-family:µ∏øÚ,±º∏≤,verdana; line-height:130%; color:#FFFFFF}
+
+/* ≈ÿΩ∫∆Æ_¿€¿∫º≥∏Ì */
+.stext_s {font-size:11px; font-family:µ∏øÚ,±º∏≤,verdana; line-height:130%; color:#636363; letter-spacing: -1px}
+
+
+/* ≈ÿΩ∫∆Æ æÁ¬ ¡§∑ƒ */
+.both {text-align:justify}
+
+
+.font_white {
+	color: #FFFFFF
+}
+.stext {
+	font-size:11px;
+}

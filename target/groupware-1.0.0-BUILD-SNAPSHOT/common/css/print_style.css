@@ -1,0 +1,129 @@
+@CHARSET "UTF-8";
+
+/*base font*/
+body{font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;}
+td{font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;}
+select{font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;}
+input{font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;}
+
+
+a:link{text-decoration:none;color:#2626D7;}
+a:visited{text-decoration:none;color:#2626D7;}
+a:active{font-family: "굴림", "Arial"; FONT-SIZE: 12px; COLOR: #4B4B4B; TEXT-DECORATION: none}
+a:hover { text-decoration:none; color:#1DA9CF;}
+/*image*/
+IMG {border: none;}
+
+/*BG*/
+.bg_lefttop  {background-repeat: no-repeat;	background-position: left top;}
+.bg_lefttopx {background-repeat: repeat-x;	background-position: left top;}
+.bg_lefttopy {background-repeat: repeat-y;	background-position: left top;}
+.bg_leftbot  {background-repeat: no-repeat; background-position: left bottom;}
+.bg_leftbotx {background-repeat: repeat-x;  background-position: left bottom;}
+.bg_leftboty {background-repeat: repeat-y;	background-position: left bottom;}
+.bg_righttop {background-repeat: no-repeat;	background-position: right top;}
+.bg_righttopx{background-repeat: repeat-x;	background-position: right top;}
+.bg_righttopy{background-repeat: repeat-y;	background-position: right top;}
+.bg_rightbot {background-repeat: no-repeat;	background-position: right bottom;}
+.bg_rightbotx{background-repeat: repeat-x;	background-position: right bottom;}
+.bg_rightboty{background-repeat: repeat-y;	background-position: right bottom;}
+.bg_midtopy{background-repeat: repeat-y;	background-position: middle bottom;}
+.bg_consult  {background-repeat: no-repeat;	background-position: 10px 19px;}
+.bg_shadow  {background-repeat: no-repeat;	background-position: left top; filter:alpha(opacity=100)}
+
+/*박스*/
+.box_left{border-width:1px;border-style:solid;border-color:#B4B4B4}
+.box_contents01{border-width:1px;border-style:solid;border-color:#B4B4B4}
+.box_contents02{border-width:1px;border-style:solid;border-color:#B4B4B4}
+
+
+/*스크롤*/
+BODY { 
+scrollbar-3dlight-color:#FFFFFF;
+scrollbar-arrow-color:#939393;
+scrollbar-track-color:#F4F4F4;
+scrollbar-darkshadow-color:#FFFFFF;
+scrollbar-face-color:#EDEDED;
+scrollbar-highlight-color:#CCCCCC;
+scrollbar-shadow-color:#BDBDBD	
+}
+
+
+
+/* top menu (상단메뉴) */
+.topmenu {font-size:13px;border:0;  padding: 3 3 3 3; }
+.topmenu_on {font-size:13px;color:#FFFFFF;background:#425A51; border:0; border-width: 1px; cursor:hand; padding: 3 3 3 3; }
+
+/* left menu (왼쪽메뉴) */
+.leftmenu {background:#EDEDED; border:0; padding:3 0 0 5;}
+.leftmenu_on {background:#FFFFFF; border:0; border-color: #BBBBBB; border-width: 0px; border-style: solid; cursor:hand; padding:3 0 0 5;}
+
+/* 게시판 롤오버 */
+.gesi {background:#FFFFFF;}
+.gesi_on {background:#F2FBF5;}
+
+/*footer*/
+.footer {font-size:11px;}
+
+/*폼(form) 정의*/
+.btn01 {background:#E9E9E9; border:1 solid #B4B4B4; font-size:12px;}
+.textbox01 {font-size:12px;}
+.select01 {font-size:12px;}
+.textarea01{font-size:12px; scrollbar-3dlight-color: #E6E4E0; scrollbar-arrow-color:#ffffff ; scrollbar-base-color:#ffffff ; scrollbar-darkshadow-color: 6D6D6D; scrollbar-face-color: E6E4E0; scrollbar-highlight-color: #ffffff; scrollbar-shadow-color: B6B6B6}
+
+/*폰트정의*/
+#font_num01 {font-family:Tahoma; font-size:12px;}
+.submm {font-size:13px;color:#ffffff; padding: 3 3 3 3;}
+
+/*테이블*/
+.td1  { background:#ffffff;  font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;  vertical-align:middle; padding:5 0 3 5 } /* 게시판 셀 body1*/ 
+.td2  { background:#C4DBDF;  font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;  align:center; height:25 } /* 게시판 헤더 body1*/ 
+.td3  { background:#C1E3BF;  font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;  align:center; height:25 } /* 게시판 읽기*/ 
+.td4  { background:#C1E3BF;  font-size:12px; font-family: "굴림", "Arial"; color:#4B4B4B;  align:center; height:25 } /* 게시판 헤더2*/ 
+.td5  { background:#C4DBDF;  font-size:12px; font-family: "굴림", "Arial"; color:#000000;  align:center; height:25; font-weight:bold;} /* 프린트 헤더1*/ 
+
+
+/*엑셀받기 타이틀 */
+.study1  { background:#FFFFFF;  font-size:15px; font-family: "굴림", "Arial"; color:#000000;  align:center; height:25; font-weight:bold;} /* 입과현황*/ 
+.study2  { background:#FFFFFF;  font-size:20px; font-family: "굴림", "Arial"; color:#000000;  align:center; height:25; font-weight:bold;} /* 입과현황*/ 
+/*엑셀받기 제목 */
+.ts03 {font-size:12px;color:#FFFFFF;font-size:20px; font-family: "굴림", "Arial"; color:#000000;  align:center; height:25; font-weight:bold;}
+
+
+.tdbody1  { background:#FFFFFF;} /*body 01 테이블전체배경 흰색*/
+.tdbody2  { background:#FFFFFF;} /*body 02 테이블전체배경 흰색*/
+.tdbody3  { background:#FFFFFF;} /*body 03 테이블전체배경 흰색*/
+.tdbody4  { background:#FFFFFF;} /*body 03 프린트용전체배경 흰색*/
+
+.tdline1 {background:#B4B4B4;} /*body 01 테이블 테두리라인*/
+.tdline2 {background:#B4B4B4;} /*body 02 테이블 테두리라인*/
+.tdline3 {background:#B4B4B4;} /*body 03 테이블 테두리라인*/
+.tdline4 {background:#E1E1E1;} /*body 01 게시판라인*/
+.tdline4 {background:#008080;} /*게시판라인2*/
+
+.tdline5 {background:#008080;} /*프린트용 테투디라인*/
+
+.tbody1 {font-size:11px;line-height:15px;letter-spacing:-1px;}
+.tbody2 {font-size:12px;line-height:15px;letter-spacing:-1px;}
+
+.ts01 {background:#F7F7F7;font-size:12px; } /* 테이블 흐린회색*/
+.ts02 {font-size:12px;color:#FFFFFF; } 
+.ts03 {background:#E9E9E9;font-size:12px; } /* 테이블 진한회색*/
+.ts04 {background:#92AAAE;} /* body01 게시판타이틀라인*/
+
+.tsbody01 {background:#F7F7F7;font-size:12px; } /* 테이블 흐린회색*/
+.tsbody011 {background:#E9E9E9;font-size:12px; } /* 테이블 진한회색*/
+
+.intype01 {background:#F7F7F7;font-size:12px;border:1px solid #C0C0C0;line-height:17px;} /* 텍스트타입 클래스 제어부분*/
+.intype02 {FONT-SIZE: 9pt; COLOR: #000000; BORDER: 1px 1px 1px 1px; 
+	FONT-FAMILY: 굴림,돋움,seoul,Arial; border: #C0C0C0; border-style: solid; 
+	border-width: 1px 1px 1px 1px; text-align:middel}
+.intype03 {FONT-SIZE: 9pt; COLOR: #000000; BORDER: 1px 1px 1px 1px; 
+	FONT-FAMILY: 굴림,돋움,seoul,Arial; border: #C0C0C0; border-style: solid; 
+	border-width: 1px 1px 1px 1px; text-align:middel; background:#EAE5E5;}
+/* 통계 테이블 관련 추가 CSS added by jihooni 2005.06.10*/	
+.ts05  { background:AFE0F1;  font-size:12px; font-family: "돋움", "Arial"; align:center; height:25; font-weight:bold; } /* 테이블 헤더 1 */ 
+.ts06  { background:#DCF0F3;  font-size:12px; font-family: "돋움", "Arial"; align:center; height:25; font-weight:bold; } /* 테이블 헤더 2 서브타이틀 */ 
+.ts07  { background:#E0E8F7;  font-size:12px; font-family: "돋움", "Arial"; align:center; height:25; } /* 테이블 내용 회색  */ 
+.ts070 { background:#E0E8F7;  font-size:12px; font-family: "돋움", "Arial"; align:center; height:25; font-weight:bold; } /* 테이블 내용 회색 글자 굵게  */ 
+.ts08  { background:#FFFFFF;  font-size:12px; font-family: "돋움", "Arial"; align:center; height:25; } /* 테이블 일반 내용 흰색 */ 

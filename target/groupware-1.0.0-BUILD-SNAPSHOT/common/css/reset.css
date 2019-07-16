@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* @import url(http://api.mobilis.co.kr/webfonts/css/?fontface=NanumGothicWeb); */
+@font-face {
+  font-family: ng;
+  src: url('/common/font/NanumGothic.eot');
+  src: local("※"), url('/common/font/NanumGothic.woff') format("woff"); }
+/* * { font-family: 'NanumGothic', '나눔고딕','NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum; } */
+
+html, body { height: 100%;}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, aside, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;padding: 0;border: 0;}
+
+body {-webkit-text-size-adjust: none;font-size: 0.78em;color: #444444;font-family: '나눔고딕', 'NanumGothic', '돋움',Dotum,AppleGothic,Arial Unicode MS,sans-serif;overflow-y: scroll;*overflow-y: visible;}
+/* to enable resizing for IE */
+input,textarea,select	{ font-size:100%;}
+
+h1, h2, h3, h4, h5, h6 {font-weight: 400;font-size: 1em;}
+
+dl, ul, ol, li {list-style: none;}
+
+button {border: 0 none;background-color: transparent;cursor: pointer;margin: 0;font-family: '나눔고딕', NanumGothic, ng, "돋움", Dotum, AppleGothic, Arial Unicode MS, sans-serif; }
+
+input, select, textarea, button {font-size: 100%;vertical-align: middle;}
+
+table {border-collapse: collapse;border-spacing: 0;}
+
+input[type=text], input[type=password], input[type=submit], input[type=search], input[type=tel], input[type=email] {-webkit-appearance: none;border-radius:0;}
+input:checked[type=checkbox] {background-color: #666;-webkit-appearance: checkbox; }
+
+button, input[type=button], input[type=submit], input[type=reset], input[type=file] {-webkit-appearance: button;border-radius: 0;cursor: pointer;border: none;}
+
+a {color: #444444;text-decoration: none;}
+
+a:active, a:hover {text-decoration: underline;}
+
+address, caption, cite, code, dfn, em, var {font-style: normal;font-weight: 400;}
+
+fieldset, .section {padding-bottom: 20px;}

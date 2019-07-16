@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* server developer css */
+
+/* ********************* rating ********************* */
+.rating {	cursor: pointer; margin: 0 1em; clear: both; display: block;}
+.rating:after { content: '.'; display: block; height: 0; width: 0; clear: both; visibility: hidden; }
+.cancel,
+.star { float: left; width: 17px; height: 15px; overflow: hidden; text-indent: -999em; cursor: pointer; }
+.cancel,
+.cancel a {background: url(/images/rating/delete.gif) no-repeat 0 -16px;}
+.star,
+.star a {background: url(/images/rating/star.gif) no-repeat 0 0px;}
+.cancel a,
+.star a { display: block; width: 100%; height: 100%; background-position: 0 0px; }
+div.rating div.on a { background-position: 0 -16px; }
+div.rating div.hover a,
+div.rating div a:hover { background-position: 0 -32px; }
+
+/* *********************추가 스타일_김란_2014.03.12********************** */
+/* 동일기간 수강 가능 수 */
+.txtblod {padding-left: 25px; font-weight: bold;}
+/* popup 컨텐츠 부분 속성 조정 */
+.layerPopup .popContents2 {display: inline-block; position: relative; padding: 20px;}
+/* 왼쪽 메뉴구성 리스트 선택부 */
+.leftBox {float: left; width:30%; border: 1px solid #d3d3d3; padding: 10px; margin: 10px 5px 0 0;}
+
+/* 색상이 다른 탭메뉴 */
+.tab2 {overflow: hidden; border-bottom: 2px solid #000; margin:0 0 5px 0;}
+.tab2 li { float: left; }
+.tab2 li.active2 button { background: #000; padding: 5px 8px; color: #fff; -webkit-border-radius: 8px 8px 0 0; -moz-border-radius: 8px 8px 0 0; border-radius: 8px 8px 0 0; margin-right: 1px;}
+.tab2 li.none button {background: #B1B1B1; padding: 5px 8px; color: #fff; -webkit-border-radius: 8px 8px 0 0; -moz-border-radius: 8px 8px 0 0; border-radius: 8px 8px 0 0; margin-right: 1px; }
+/* 오른쪽 메뉴구성정의 */
+.rightBox {float: left; display: inline-block; width: 64%; border: 1px solid #d3d3d3; padding: 10px; margin: 10px 0; }
+/* 오른쪽 메뉴구성정의 타이틀 */
+.intitle { font-family: 나눔고딕,NanumGothic,ng,"돋움",Dotum,AppleGothic,Arial Unicode MS,sans-serif; padding: 0 0 10px 0; border-bottom: 1px solid #339fd6; margin-bottom: 10px; width: 98%; }
+/*메뉴 구성방법 안내 타이틀 */
+.menu_title {padding: 0 0 10px 10px; font-size: 1.2em; font-family: 나눔고딕,NanumGothic,ng,"돋움",Dotum,AppleGothic,Arial Unicode MS,sans-serif; color:#339fd6;font-weight: bold; }
+/* 메뉴 구성방법 안내 내용 */
+#menu_content {font-family: 나눔고딕,NanumGothic,ng,"돋움",Dotum,AppleGothic,Arial Unicode MS,sans-serif; margin:0 20px;}
+#menu_content dt{font-weight:bold; font-size:120%; }
+#menu_content dd{line-height: 22px; padding:3px 0 20px 20px;}
+
+/* 구성 미리 보기 버튼 오른쪽 정렬*/
+.inView {float:right;}
+
+/* boardView.jsp 게시판 조회 */
+/* 사이트 구분 박스 */
+#sitebox { width:900px;}
+#sitebox .siteinbox { float:left; width:280px; }
+/* 댓글 등록 */
+.input_comment {width:80%; height:50px; margin:5px 0 5px 10px;}
+.state { padding: 18px; background: #339fd6; color: #fff; }
+/* 별점/댓글 */
+#comment_list {border:1px solid #d3d3d3; padding:10px;}
+#comment_list li {clear:both; display:inline-block; width:100%; padding:15px 0; border-bottom:1px solid #d3d3d3;}
+#comment_list .date,
+#comment_list .name {padding:0 10px;}
+#comment_list .txt {clear:both; display:block; width:600px;padding:10px 10px 0 10px; }
+#comment_list .txt .del{ clear:both; display:block; float:right; margin:10px 0 0 0;}
+#comment_list .stmark {  float:left; padding:0px; padding:0 10px; width:100px;}
+#comment_list .onstar { background: url(/images/rating/star.gif) no-repeat 0 0px; padding:1px 4px; background-position: 0 -16px; cursor: pointer; text-decoration: none;}
+#comment_list .onstar:hover{ background-position: 0 -32px; cursor: pointer; text-decoration: none;}
+
+/* input size ran 140326 */
+.num12em { width: 100px; }
+
+/* 차수검색 자동완성 */
+#autoText { padding: 0px;	z-index: 99999; overflow: hidden; background: #FFF; }
+#autoText ul { width: 98%;	list-style-position: outside; max-height: 300px; overflow: auto; list-style: none;	border: 1px solid #ccc; padding: 0;	margin: 0;	}
+#autoText li { margin: 0px;	padding: 2px 5px;	cursor: default;	display: block; font: menu;	font-size: 12px;	line-height: 16px; 	overflow: hidden;	}
+#autoText li:hover{	background-color: #0A246A;	color: white;	}
+.ac_odd {	background-color: #eee;	}
+#ac_close { float: right; margin: 2px 2px 3px 0; padding: 3px 6px 4px 0; font-weight: bold; background: #BBBBBB; color: #fff; width: 100%; text-align: right; cursor: pointer;}
+
+
+.Nomg { margin-top: 0px !important; padding: 0px !important;}
+
+.layerPopup.w1050 {width:1050px;}
+table.basic tr.fillcolor {background: #F7F7F7;}
+
+/* 글씨크기 작게 */
+.txtsmall {font-size:90%; }
+
+/* 도서 입력 */
+#bookprice li{ display: block;}
+#bookprice .title{ text-align: right; width: 65px; display: inline-block; padding-right:5px;}
+
+/*자격시험 일정 토요일 */
+.calendar th:last-child, .calendar td:last-child {color: #0700B6;}
