@@ -30,7 +30,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor  {
 		String reqUrl = String.valueOf(request.getRequestURL());
 		log.debug("## [LoginAuthInterceptor preHandle] reqUrl =>" + reqUrl);
 		
-		if( reqUrl.indexOf("/apotest.epk")>-1 || reqUrl.indexOf("/login.do")>-1 || reqUrl.indexOf("/loginOk.do")>-1 || reqUrl.indexOf("mo/interface.do")>-1 || reqUrl.indexOf("/checkplus/process.do")>-1 || reqUrl.indexOf("/checkplus/error.do")>-1){	//�씤利앹떎�뙣�떆 login�쑝濡� redirect泥섎━�뿉 ���븳 �삁�쇅, mo/interface�쑝濡� 紐⑤컮�씪 �겢�씪�슦�뱶 �뿰�룞 �쉶�썝,而⑦뀗痢� �룞湲고솕�뿉 ���븳 �삁�쇅
+		if( reqUrl.indexOf("/apotest.epk")>-1 || reqUrl.indexOf("/login.do")>-1 || reqUrl.indexOf("/loginOk.do")>-1 || reqUrl.indexOf("mo/interface.do")>-1 || reqUrl.indexOf("/checkplus/process.do")>-1 || reqUrl.indexOf("/checkplus/error.do")>-1){	
 			return true;
 		}
 

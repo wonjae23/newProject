@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.web.WebApplicationInitializer;
@@ -105,6 +106,10 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
          resolver.setDefaultEncoding("utf-8");
          return resolver;
      }
+     
+    
+     
+    
      
      /*@Bean
      public ConnectionFactoryLocator connectionFactoryLocator() {

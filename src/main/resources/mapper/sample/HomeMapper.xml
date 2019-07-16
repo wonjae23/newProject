@@ -6,5 +6,9 @@
 	<select id="selectMember" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT *
 		FROM MEMBER
+		
+		<if test="name != ''">
+		  WHERE  MB_NAME = #{name}
+		</if>
 	</select>
 </mapper>
