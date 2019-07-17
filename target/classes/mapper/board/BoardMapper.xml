@@ -52,7 +52,7 @@
             to_char(register_datetime, 'YYYY-MM-DD HH24:mi:ss') register_datetime
         from
             board
-        order by id) total
+        order by register_datetime) total
         where
             rn &gt; #{start} and rn &lt;= #{end}
     </select>

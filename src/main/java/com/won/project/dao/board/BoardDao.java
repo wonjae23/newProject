@@ -8,7 +8,7 @@ import com.won.project.domain.BoardReply;
 
 public interface BoardDao {
 	
-int regContent(Map<String, Object> paramMap);
+	int regContent(Map<String, Object> paramMap);
     
     int modifyContent(Map<String, Object> paramMap);
     

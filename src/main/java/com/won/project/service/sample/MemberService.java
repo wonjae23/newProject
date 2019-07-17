@@ -16,4 +16,7 @@ public interface MemberService {
 	public void logout(HttpSession session);
 	
 	public MemberVO viewMember(MemberVO vo);
+	
+	//회원가입
+	public void insertMember(Map<String, Object> commandMap);
 }

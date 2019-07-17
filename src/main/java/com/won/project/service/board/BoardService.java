@@ -8,7 +8,7 @@ import com.won.project.domain.BoardReply;
 
 public interface BoardService {
 	
-int regContent(Map<String, Object> paramMap);
+	int regContent(Map<String, Object> paramMap);
     
     int getContentCnt(Map<String, Object> paramMap);
     

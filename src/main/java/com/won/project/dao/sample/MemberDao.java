@@ -16,4 +16,7 @@ public interface MemberDao {
 	public MemberVO viewMember(MemberVO vo);
 	
 	public void logout(HttpSession session);
+
+	//회원가입
+	public void insertMember(Map<String, Object> commandMap);
 }

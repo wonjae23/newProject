@@ -1,6 +1,8 @@
 package com.won.project.controller.board;
 
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,13 +26,10 @@ public class BoardController {
 	@Autowired
     BoardService boardService;
 	
-	private PasswordEncoder passwordEncoder;
-
     //게시글 리스트 조회
     @RequestMapping(value = "/board/list")
     public String boardList(@RequestParam Map<String, Object> paramMap, Model model) {
-    	System.out.println("리스트 페이지 왔습니다.");
-        //조회 하려는 페이지
+    	//조회 하려는 페이지
         int startPage = (paramMap.get("startPage")!=null?Integer.parseInt(paramMap.get("startPage").toString()):1);
         //한페이지에 보여줄 리스트 수
         int visiblePages = (paramMap.get("visiblePages")!=null?Integer.parseInt(paramMap.get("visiblePages").toString()):10);
@@ -53,11 +52,6 @@ public class BoardController {
         }
  
         paramMap.put("start", startLimitPage);
- 
-        //MYSQL
-        //paramMap.put("end", visiblePages);
- 
-        //ORACLE
         paramMap.put("end", startLimitPage+visiblePages);
  
         //jsp 에서 보여줄 정보 추출
@@ -77,15 +71,14 @@ public class BoardController {
         model.addAttribute("replyList", boardService.getReplyList(paramMap));
         model.addAttribute("boardView", boardService.getContentView(paramMap));
  
-        return "/board/listboardView";
+        return "/board/boardView";
  
     }
  
     //게시글 등록 및 수정
     @RequestMapping(value = "/board/edit")
     public String boardEdit(HttpServletRequest request, @RequestParam Map<String, Object> paramMap, Model model) {
-    	System.out.println("에디트 페이지 왔습니다.");
-        //Referer 검사
+       //Referer 검사
         String Referer = request.getHeader("referer");
  
         if(Referer!=null){//URL로 직접 접근 불가
@@ -120,8 +113,21 @@ public class BoardController {
         Map<String, Object> retVal = new HashMap<String, Object>();
  
         //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+  		}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
         
         paramMap.put("password", password);
  
@@ -148,10 +154,23 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
-        
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+  		}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+            
         paramMap.put("password", password);
  
         //정보입력
@@ -175,10 +194,23 @@ public class BoardController {
  
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
+        
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+ 		}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
         
         paramMap.put("password", password);
  
@@ -204,10 +236,23 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
-        
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("reply_password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+  		}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+               
         paramMap.put("reply_password", password);
  
         //정보입력
@@ -235,10 +280,23 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
-        
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("reply_password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+ 		}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+              
         paramMap.put("reply_password", password);
  
         //정보입력
@@ -263,9 +321,22 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("reply_password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+    	}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
         
         paramMap.put("reply_password", password);
  
@@ -292,10 +363,23 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-        //패스워드 암호화
-        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String password = encoder.encode(paramMap.get("password").toString());
-        
+      //패스워드 암호화
+        String password = "";
+        try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(paramMap.get("reply_password").toString().getBytes("UTF-8"));
+            StringBuffer hexString = new StringBuffer();
+ 
+            for (int i = 0; i < hash.length; i++) {
+                String hex = Integer.toHexString(0xff & hash[i]);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            password = hexString.toString();
+    	}catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+         
         paramMap.put("reply_password", password);
  
         System.out.println(paramMap);

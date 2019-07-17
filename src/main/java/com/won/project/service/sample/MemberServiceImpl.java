@@ -43,4 +43,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.viewMember(vo);
 	}
 
+	@Override
+	public void insertMember(Map<String, Object> commandMap) {
+		memberDao.insertMember(commandMap);
+	}
+
 }

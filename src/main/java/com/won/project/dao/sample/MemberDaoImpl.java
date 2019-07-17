@@ -36,4 +36,9 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void logout(HttpSession session) {}
 
+	@Override
+	public void insertMember(Map<String, Object> commandMap) {
+		sqlSession.insert("home.insertMember", commandMap);
+	}
+
 }

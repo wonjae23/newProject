@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ include file="/WEB-INF/views/common/loginStatus.jsp"%>
+<%@ page session="true" %>
 <html>
     <head>
         <title>게시판</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
         <script type="text/javascript">
             $(document).ready(function(){
                  
@@ -70,8 +75,7 @@
                 });
                  
                 $("#write").click(function(){
-                	alert('a');
-                    location.href = "/board/edit";
+                	  location.href = "/board/edit";
                 });
                                  
                 $(document).on("click","button[name='page_move']",function(){
@@ -89,30 +93,38 @@
         </script>
         <style>
             .mouseOverHighlight {
-                   border-bottom: 1px solid blue;
                    cursor: pointer !important;
-                   color: blue;
                    pointer-events: auto;
+                   text-decoration:none;
                 }
+            .bs-example{
+		    	margin: 130px;
+		    }
         </style>
     </head>
     <body>
-    	
-    	<%-- <c:if test="${sessionScope.userId == null }">
-    		<h2>${sessionScope.userName}님 환영합니다.</h2>
-    	</c:if> --%>
         <form class="form-inline" id="frmSearch" action="/board/list">
             <input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
             <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
-            <div align="center">
-                <table width="1200px">
+            
+            <div align="center" class="bs-example">
+            	<c:choose>
+					<c:when test="${sessionScope.userId == null }">
+						<a href="${path}/main/login">로그인 이동</a>
+					</c:when>
+					<c:otherwise>
+						${sessionScope.userName}님 환영합니다.
+						<a href="${path}/main/logout">로그아웃</a>
+					</c:otherwise>
+				</c:choose>
+                <table width="1200px" >
                     <tr>
                         <td align="right">
-                            <button type="button" id="write" name="write">글 작성</button>
+                        	<button type="button" class="btn btn-secondary btn-sm" id="write" name="write">게시글 작성</button>
                         </td>
                     </tr>
                 </table>
-                <table border="1" width="1200px">
+                <table  width="1200px" class="table">
                     <tr>
                         <th width="50px">
                             No
@@ -140,7 +152,7 @@
                                 <tr>
                                     <td align="center">${boardList.id}</td>
                                     <td>
-                                        <a name="subject" class="mouseOverHighlight" content_id="${boardList.id}">${boardList.subject}</a>
+                                        <a name="subject" class="mouseOverHighlight"  content_id="${boardList.id}">${boardList.subject}</a>
                                     </td>
                                     <td align="center">${boardList.writer}</td>
                                     <td align="center">${boardList.register_datetime}</td>
