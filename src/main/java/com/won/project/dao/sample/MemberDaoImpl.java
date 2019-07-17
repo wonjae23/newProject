@@ -25,7 +25,6 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public boolean loginCheck(MemberVO vo) {
 		String name = sqlSession.selectOne("home.loginCheck",vo);
-		System.out.println("1111111111:"+name);
 		return (name == null) ? false : true;
 	}
 

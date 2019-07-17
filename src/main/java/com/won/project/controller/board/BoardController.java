@@ -29,7 +29,7 @@ public class BoardController {
     //게시글 리스트 조회
     @RequestMapping(value = "/board/list")
     public String boardList(@RequestParam Map<String, Object> paramMap, Model model) {
- 
+    	System.out.println("리스트 페이지 왔습니다.");
         //조회 하려는 페이지
         int startPage = (paramMap.get("startPage")!=null?Integer.parseInt(paramMap.get("startPage").toString()):1);
         //한페이지에 보여줄 리스트 수
@@ -84,7 +84,7 @@ public class BoardController {
     //게시글 등록 및 수정
     @RequestMapping(value = "/board/edit")
     public String boardEdit(HttpServletRequest request, @RequestParam Map<String, Object> paramMap, Model model) {
- 
+    	System.out.println("에디트 페이지 왔습니다.");
         //Referer 검사
         String Referer = request.getHeader("referer");
  

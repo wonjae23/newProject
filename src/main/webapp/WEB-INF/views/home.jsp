@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/jstl_taglib.jsp" %>
-<%@ page session="false" %>
 <%@ include file="/WEB-INF/views/common/popup_header.jsp"%>
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 

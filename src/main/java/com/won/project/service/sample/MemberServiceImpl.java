@@ -26,11 +26,10 @@ public class MemberServiceImpl implements MemberService{
 	public boolean loginCheck(MemberVO vo, HttpSession session) {
 		boolean result = memberDao.loginCheck(vo);
 		if(result) {
-			MemberVO vo2 = viewMember(vo);
-			
+			MemberVO vo2 = viewMember(vo);		
 			session.setAttribute("userId", vo2.getUserId());
-			session.setAttribute("userName", vo2.getUserName());
-		}
+			session.setAttribute("userName", vo2.getUserName());	
+			}
 		return result;
 	}
 

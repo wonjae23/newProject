@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page session="false" %>
+<%@ include file="/WEB-INF/views/common/loginStatus.jsp"%>
 <html>
     <head>
         <title>게시판</title>
@@ -70,6 +70,7 @@
                 });
                  
                 $("#write").click(function(){
+                	alert('a');
                     location.href = "/board/edit";
                 });
                                  
@@ -96,10 +97,10 @@
         </style>
     </head>
     <body>
-    	<%@ include file="/WEB-INF/views/common/loginStatus.jsp"%>
-    	<c:if test="${msg == 'success' }">
-    		<h2>${sessionScope.userName} (${sessionScope.userId})님 환영합니다.</h2>
-    	</c:if>
+    	
+    	<%-- <c:if test="${sessionScope.userId == null }">
+    		<h2>${sessionScope.userName}님 환영합니다.</h2>
+    	</c:if> --%>
         <form class="form-inline" id="frmSearch" action="/board/list">
             <input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
             <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
@@ -117,20 +118,20 @@
                             No
                         </th>
                         <th width="850px">
-                            제목
+                           	 제목
                         </th>
                         <th width="100px">
-                            작성자
+                           	 작성자
                         </th>
                         <th width="200px">
-                            작성일
+                           	 작성일
                         </th>
                     </tr>
                     <c:choose>
                         <c:when test="${fn:length(boardList) == 0}">
                             <tr>
                                 <td colspan="4" align="center">
-                                    조회결과가 없습니다.
+                                    	조회결과가 없습니다.
                                 </td>
                             </tr>
                         </c:when>

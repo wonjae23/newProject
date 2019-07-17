@@ -52,18 +52,17 @@ public class MainController {
     }
     
     @RequestMapping("/main/loginCheck")
-    public ModelAndView loginCheck(@ModelAttribute MemberVO vo, HttpSession session) {
+    public String loginCheck(@ModelAttribute MemberVO vo, HttpSession session, HttpServletRequest request, Model model) {
     	boolean result = memberService.loginCheck(vo, session);
-    	ModelAndView mav = new ModelAndView();
     	
     	if(result == true) {
-    		mav.setViewName("/board/boardlist");
-    		mav.addObject("msg","success");
+    		model.addAttribute("msg", "success");
+    		return "redirect:/board/list";
     	}else {
-    		mav.setViewName("/main/login");
-    		mav.addObject("msg","failure");
+    		model.addAttribute("msg", "failure");
+    		return "redirect:/main/login";
     	}
-    	return mav;
+  
     }
 	
     @RequestMapping("/main/logout")
