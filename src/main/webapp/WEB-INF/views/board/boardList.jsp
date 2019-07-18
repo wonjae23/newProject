@@ -150,7 +150,7 @@
                         <c:otherwise>
                             <c:forEach var="boardList" items="${boardList}" varStatus="status">
                                 <tr>
-                                    <td align="center">${boardList.id}</td>
+                                    <td align="center">${boardList.rn}</td>
                                     <td>
                                         <a name="subject" class="mouseOverHighlight"  content_id="${boardList.id}">${boardList.subject}</a>
                                     </td>

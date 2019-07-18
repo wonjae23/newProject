@@ -1,4 +1,4 @@
-package com.won.project.dao.sample;
+package com.won.project.dao.member;
 
 import java.util.List;
 import java.util.Map;
@@ -39,6 +39,11 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void insertMember(Map<String, Object> commandMap) {
 		sqlSession.insert("home.insertMember", commandMap);
+	}
+
+	@Override
+	public int doubleCheck(Map<String, Object> commandMap) {
+		return sqlSession.selectOne("home.doubleCheck",commandMap);
 	}
 
 }

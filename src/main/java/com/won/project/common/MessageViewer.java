@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.won.project.util.StringUtil;
 
-
-
+//controller에서 alert창 띄우는 클래스
 public class MessageViewer {
 	//htmls
 	private static String htmls = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">" +
@@ -27,7 +26,7 @@ public class MessageViewer {
 	/**
 	 * alert message 출력 및 window close, reload
 	 * @param response	: HttpServletResponse 객체 - controller의 response 객체 전달
-	 * @param alertTitle : alert title bar message - defalult : !!! 이패스코리아 LMS !!!
+	 * @param alertTitle : alert title bar message - defalult : 
 	 * @param msg : alert 출력 message
 	 * @param redirecturl : redirect url - parameter 포함(GET방식)
 	 * @param historyback : history.back() true/false

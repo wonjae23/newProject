@@ -1,27 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/WEB-INF/views/common/jstl_taglib.jsp"%>
+<%@ include file="/WEB-INF/views/common/bootstrap.jsp"%>
 <%@ page session="false" %>
+
 <html>
     <head>
         <title>게시판</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
-        <script src="//cdn.ckeditor.com/4.7.1/standard/ckeditor.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                 
+                
+            	//에디터 초기 설정
                 CKEDITOR.replace( 'content' );
-                CKEDITOR.config.height = 500;
+                CKEDITOR.config.height = 200;
                  
+                //게시글 목록으로 이동
                 $("#list").click(function(){
                     location.href = "/board/list";
                 });
                  
+              	//게시글 등록 버튼 클릭 시
                 $("#save").click(function(){
                      
                     //에디터 내용 가져옴
                     var content = CKEDITOR.instances.content.getData();
                      
-                    //널 검사
+                    //유효성 검사
                     if($("#subject").val().trim() == ""){
                         alert("제목을 입력하세요.");
                         $("#subject").focus();
@@ -59,7 +62,7 @@
                         type        :   "post",
                         data        :   objParams,
                         success     :   function(retVal){
- 
+                        	
                             if(retVal.code == "OK") {
                                 alert(retVal.message);
                                 location.href = "/board/list";  
@@ -78,32 +81,46 @@
                  
             });
         </script>
+        
     </head>
     <body>
         <input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
-        <div align="center">
+        <div class="container">
             </br>
             </br>
-            <table width="1200px">
-                <tr>
-                    <td>
-                        제목: <input type="text" id="subject" name="subject" style="width:600px;" placeholder="제목" value="${boardView.subject}"/>
-                        작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10" placeholder="작성자" value="${boardView.writer}"/>
-                        비밀번호: <input type="password" id="password" name="password" style="width:170px;" maxlength="10" placeholder="패스워드"/>
-                        <button id="save" name="save">저장</button>                           
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <textarea name="content" id="content" rows="10" cols="80">${boardView.content}</textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">
-                        <button id="list" name="list">게시판</button>
-                    </td>
-                </tr>
-            </table>
+            <div class="form-group">
+            	<label for="title" class="col-sm-2 control-label">제목</label>
+            	<div class="col-sm-10">
+            		<input type="text" id="subject" name="subject" class="form-control" placeholder="제목" value="${boardView.subject}"/>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+            	<label for="title" class="col-sm-2 control-label">작성자</label>
+            	<div class="col-sm-10">
+            		<input type="text" id="writer" name="writer"  class="form-control" maxlength="10" placeholder="작성자" value="${boardView.writer}"/>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+            	<label for="title" class="col-sm-2 control-label">비밀번호</label>
+            	<div class="col-sm-10">
+            		<input type="password" id="password" name="password" class="form-control"  placeholder="패스워드"/>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+            	<label for="title" class="col-sm-2 control-label">내용</label>
+            	<div class="col-sm-10">
+            		<textarea name="content" id="content" class="form-control" rows="10" cols="40">${boardView.content}</textarea>
+            	</div>
+            </div>
+            
+            <div class="form-group">
+            	<button id="save" name="save" class="btn btn-primary">저장</button>
+            	<button id="list" name="list" class="btn btn-success">목록</button>
+            </div>
+            
         </div>
     </body>
 </html>

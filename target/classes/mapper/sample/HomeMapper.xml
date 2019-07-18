@@ -33,4 +33,11 @@
 		INSERT INTO tbl_member (user_name, user_id, user_email, user_pw)
 		VALUES(#{userName}, #{userId}, #{userEmail}, #{userPw})
 	</insert>
+	
+	<select id="doubleCheck" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(*)
+		FROM tbl_member
+		WHERE user_id = #{userId}
+	</select>
 </mapper>

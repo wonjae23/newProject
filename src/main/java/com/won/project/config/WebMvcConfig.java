@@ -41,10 +41,7 @@ import com.won.project.interceptor.LoginAuthInterceptor;
 @ComponentScan(basePackages = { "com.won.project"})
 @PropertySource(value = { "classpath:application.properties" })
 public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitializer {
- 
-	@Inject
-    private Environment environment;
-	
+
 	@Bean
     public InternalResourceViewResolver resolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -56,7 +53,6 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
 		registry.addResourceHandler("/common/**").addResourceLocations("/common/");
     }
 	
@@ -71,9 +67,7 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {  
     	argumentResolvers.add(new HeaderMapArgumentResolver());
     }
- 
    
-    
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
     	StringHttpMessageConverter sk =new StringHttpMessageConverter();
@@ -82,14 +76,6 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
     	ObjectMapper mapper = new ObjectMapper();
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         converters.add(new MappingJackson2HttpMessageConverter(mapper));
-    	
-    /*  Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
-        .indentOutput(true)
-        .dateFormat(new SimpleDateFormat("yyyy-MM-dd"))
-        .modulesToInstall(new ParameterNamesModule());
-      converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
-      converters.add(new MappingJackson2XmlHttpMessageConverter(builder.xml().build()));
-    */
     }
      
      @Override
@@ -107,33 +93,5 @@ public class WebMvcConfig  implements WebMvcConfigurer, WebApplicationInitialize
          resolver.setDefaultEncoding("utf-8");
          return resolver;
      }
-     
     
-     
-    
-     
-     /*@Bean
-     public ConnectionFactoryLocator connectionFactoryLocator() {
-         ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-         registry.addConnectionFactory(new FacebookConnectionFactory(
-                 environment.getProperty("2104056399720115"),
-                 environment.getProperty("76bf158476462805a71ab99bd54885bd")));
-    
-         return registry;
-     }*/
-     
-     @Bean
-     public FacebookConnectionFactory connectionFactory() {
-         FacebookConnectionFactory beanfact = new FacebookConnectionFactory("2104056399720115","76bf158476462805a71ab99bd54885bd");
-         return beanfact;
-     }
-
-     @Bean
-     public OAuth2Parameters oAuth2Parameters() {
-         OAuth2Parameters auth=new OAuth2Parameters();
-         auth.setScope("email");
-         auth.setRedirectUri("https://localhost:8443/return.do");
-         return auth;
-     }
-
 }

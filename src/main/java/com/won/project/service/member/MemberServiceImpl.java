@@ -1,4 +1,4 @@
-package com.won.project.service.sample;
+package com.won.project.service.member;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.won.project.dao.sample.MemberDao;
+import com.won.project.dao.member.MemberDao;
 import com.won.project.domain.MemberVO;
 
 @Service("memberService")
@@ -46,6 +46,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void insertMember(Map<String, Object> commandMap) {
 		memberDao.insertMember(commandMap);
+	}
+
+	@Override
+	public int doubleCheck(Map<String, Object> commandMap) {
+		return memberDao.doubleCheck(commandMap);
 	}
 
 }

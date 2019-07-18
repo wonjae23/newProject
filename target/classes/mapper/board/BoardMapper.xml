@@ -18,6 +18,7 @@
             #{password}
         )
     </insert>
+    
     <update id="updateContent" parameterType="java.util.HashMap">
         update
             board
@@ -29,33 +30,26 @@
         where
             id = #{id}
     </update>
+    
     <select id="selectContentCnt" resultType="int" parameterType="java.util.HashMap">
         select
             count(id)
         from
             board
     </select>
+    
     <select id="selectContent" resultType="com.won.project.domain.Board" parameterType="java.util.HashMap">
-        select
-            id,
-            subject,
-            content,
-            writer,
-            register_datetime
-        from
-        (select
-            rownum rn,
-            id,
-            subject,
-            content,
-            writer,
-            to_char(register_datetime, 'YYYY-MM-DD HH24:mi:ss') register_datetime
-        from
-            board
-        order by register_datetime) total
+        select * from (
+		  select rownum rn, id, subject, content, writer, register_datetime 
+		  from (
+		    select id, subject, content, writer, to_char(register_datetime, 'YYYY-MM-DD HH24:mi:ss') register_datetime 
+		    from board order by register_datetime desc
+		  ) total 
+		)
         where
             rn &gt; #{start} and rn &lt;= #{end}
     </select>
+    
     <select id="selectContentView" resultType="com.won.project.domain.Board" parameterType="java.util.HashMap">
         select
             id,
@@ -91,6 +85,7 @@
             #{reply_password}
         )
     </insert>
+    
     <select id="selectBoardReplyList" resultType="com.won.project.domain.BoardReply" parameterType="java.util.HashMap">
         select
             reply_id,
@@ -106,6 +101,7 @@
             board_id = #{id}
         order by reply_id asc
     </select>
+    
     <delete id="deleteBoardReply" parameterType="java.util.HashMap">
         delete
         from
@@ -114,6 +110,7 @@
             reply_id = #{reply_id}
             and reply_password = #{reply_password}
     </delete>
+    
     <delete id="deleteBoardReplyAll" parameterType="java.util.HashMap">
         delete
         from
@@ -137,6 +134,7 @@
                     and reply_password = #{reply_password}
             )
     </delete>
+    
     <select id="selectBoardCnt" resultType="int" parameterType="java.util.HashMap">
         select
             count(id)
@@ -146,6 +144,7 @@
             id = #{id}
             and password = #{password}
     </select>
+    
     <delete id="deleteBoard" parameterType="java.util.HashMap">
         delete
         from
@@ -154,6 +153,7 @@
             id = #{id}
             and password = #{password}
     </delete>
+    
     <select id="selectReplyPassword" resultType="int" parameterType="java.util.HashMap">
         select
             count(*)
@@ -163,6 +163,7 @@
             reply_id = #{reply_id}
             and reply_password = #{reply_password}
     </select>
+    
     <update id="updateReply" parameterType="java.util.HashMap">
         update
             board_reply
@@ -175,4 +176,5 @@
         where
             reply_id = #{reply_id}
     </update>
+    
 </mapper>

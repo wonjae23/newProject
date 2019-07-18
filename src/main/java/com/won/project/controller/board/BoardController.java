@@ -36,13 +36,15 @@ public class BoardController {
         //일단 전체 건수를 가져온다.
         int totalCnt = boardService.getContentCnt(paramMap);
  
- 
-        //아래 1,2는 실제 개발에서는 class로 빼준다. (여기서는 이해를 위해 직접 적음)
         //1.하단 페이지 네비게이션에서 보여줄 리스트 수를 구한다.
-        BigDecimal decimal1 = new BigDecimal(totalCnt);
-        BigDecimal decimal2 = new BigDecimal(visiblePages);
-        BigDecimal totalPage = decimal1.divide(decimal2, 0, BigDecimal.ROUND_UP);
- 
+        BigDecimal decimal1 = new BigDecimal(totalCnt);								//ex:258
+        BigDecimal decimal2 = new BigDecimal(visiblePages);							//ex:10
+        BigDecimal totalPage = decimal1.divide(decimal2, 0, BigDecimal.ROUND_UP);	//ex:26
+        
+        System.out.println("decimal1:"+decimal1);
+        System.out.println("decimal2:"+decimal2);
+        System.out.println("totalPage:"+totalPage);
+        
         int startLimitPage = 0;
         //2.mysql limit 범위를 구하기 위해 계산
         if(startPage==1){
@@ -51,6 +53,13 @@ public class BoardController {
             startLimitPage = (startPage-1)*visiblePages;
         }
  
+        System.out.println("startLimitPage:"+startLimitPage);
+        System.out.println("startLimitPage+visiblePages:"+startLimitPage+visiblePages);
+        
+        System.out.println("startPage:"+startPage);
+        System.out.println("totalCnt:"+totalCnt);
+        System.out.println("totalPage:"+totalPage);
+        
         paramMap.put("start", startLimitPage);
         paramMap.put("end", startLimitPage+visiblePages);
  
@@ -59,7 +68,7 @@ public class BoardController {
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
         model.addAttribute("totalPage", totalPage);//페이지 네비게이션에 보여줄 리스트 수
         model.addAttribute("boardList", boardService.getContentList(paramMap));//검색
- 
+        
         return "/board/boardList";
  
     }
@@ -80,7 +89,7 @@ public class BoardController {
     public String boardEdit(HttpServletRequest request, @RequestParam Map<String, Object> paramMap, Model model) {
        //Referer 검사
         String Referer = request.getHeader("referer");
- 
+        System.out.println("1111111:"+Referer);
         if(Referer!=null){//URL로 직접 접근 불가
             if(paramMap.get("id") != null){ //게시글 수정
                 if(Referer.indexOf("/board/view")>-1){
@@ -195,7 +204,7 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
         
-      //패스워드 암호화
+        //패스워드 암호화
         String password = "";
         try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -236,7 +245,7 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-      //패스워드 암호화
+        //패스워드 암호화
         String password = "";
         try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -280,7 +289,7 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
  
-      //패스워드 암호화
+        //패스워드 암호화
         String password = "";
         try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");

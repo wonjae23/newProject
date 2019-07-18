@@ -1,7 +1,3 @@
-/**
- * Copyright (c) 2013 EPASSKOREA. All Rights Reserved.
-  * Project: Epasskorea B2B LMS Renewal(2013.07~)
-*/
 package com.won.project.util;
 
 import java.io.UnsupportedEncodingException;
@@ -13,23 +9,13 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-/**
- * Class Name : StringUtil
- * Description : String Utils
- * Modification Information
- * Date			    Autor					Contents
- * -----------  --------------  --------------------------------
- * 2013.10.00   dolcoms	 	    	
- * 
- * @author: dolcoms
- * @version: 1.0
-*/
 public class StringUtil {
 	private final static Log log = LogFactory.getLog("StringUtil");
+
 	/**
 	 * String null check
-	 * String.valueOf() 硫붿꽌�뱶瑜� �씠�슜�븳 null媛� 泥댄겕�뒗 null媛� �옄泥대�� String�쑝濡� 諛섑솚 �븯湲곕븣臾몄뿉 true瑜� 由ы꽩�븯吏� �븡�뒗�떎.
-	 * String�삎 null媛� 異붽�
+	 * String.valueOf() 메서드를 이용한 null값 체크는 null값 자체를 String으로 반환 하기때문에 true를 리턴하지 않는다.
+	 * String형 null값 추가
 	 * @param str
 	 * @return
 	 */
@@ -38,8 +24,9 @@ public class StringUtil {
 			return true;
 		else return false;
 	}
+	
 	/**
-	 * 荑쇰━ �듅�닔臾몄옄 寃��깋
+	 * 쿼리 특수문자 검색
 	 * @param params
 	 * @return
 	 */
@@ -54,7 +41,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 荑쇰━ �듅�닔臾몄옄 寃��깋 �썑 由ы꽩 媛믪� �떎�떆 �썝�옒 臾몄옄濡� 蹂�寃�
+	 * 쿼리 특수문자 검색 후 리턴 값은 다시 원래 문자로 변경
 	 * @param params
 	 * @return
 	 */
@@ -69,7 +56,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * �븳湲� �씤肄붾뵫 蹂��솚
+	 * 한글 인코딩 변환
 	 * @param params
 	 * @return
 	 */
@@ -86,19 +73,19 @@ public class StringUtil {
 	
 	
 	/**
-	 * commandMap�쓽 媛믪쓣 QueryString �삎�떇�쑝濡� �깮�꽦 諛섑솚�븳�떎.
+	 * commandMap의 값을 QueryString 형식으로 생성 반환한다.
 	 * @param commandMap
-	 * @param removeParams �젣嫄고븯怨좎옄�븯�뒗 �뙆�씪硫뷀꽣紐� (ex param1,params2,param3...)
+	 * @param removeParams 제거하고자하는 파라메터명 (ex param1,params2,param3...)
 	 * @return
 	 */
 	public static String getQueryString(Map<String, Object> commandMap, String removeParams){
-		// 湲곕낯 �젣嫄� 媛� 
+		// 기본 제거 값 
 		//removeParams = "," + removeParams + ",authsGrade,lang_code,";
 		removeParams = "," + removeParams + ",";
 		
 		StringBuilder result = new StringBuilder();
 		for(String key : commandMap.keySet()){
-			// �젣嫄곌컪�뿉 �냽�븯吏� �븡怨� 諛곗뿴媛믪씠 �븘�땺 寃쎌슦留� �뙆�씪硫뷀꽣濡� �깮�꽦
+			// 제거값에 속하지 않고 배열값이 아닐 경우만 파라메터로 생성
 			if (removeParams.indexOf("," + key + ",") == -1){
 				if(String.valueOf(commandMap.get(key)).startsWith("[Ljava.lang.String")){
 					String[] valueArr = (String[]) commandMap.get(key);
@@ -119,14 +106,14 @@ public class StringUtil {
 	
 	/**
 	 * last key + 1 return
-	 * @param type : template(T)/content(C)/webpage(W)/layout(L) 援щ텇 
+	 * @param type : template(T)/content(C)/webpage(W)/layout(L) 구분 
 	 * @param maxKey : last key
 	 * @return
 	 */
 	public static String getMakeTCPCodeKey(String type, String maxKey){
 		
 		if(!getNullCheck(type) && !getNullCheck(maxKey)){
-			int tmp = Integer.valueOf(maxKey.replace(type, ""));   //援щ텇�젣嫄�
+			int tmp = Integer.valueOf(maxKey.replace(type, ""));   //구분제거
 			String zStr = "";
 			for(int i=0; i<(maxKey.length() - String.valueOf(tmp+1).length()-1); i++){
 				zStr = zStr + "0";
@@ -160,22 +147,7 @@ public class StringUtil {
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	
-	    	/*
-			try { 
-	    		//buf.append(java.net.URLEncoder.encode(key));
-				buf.append(new String(key.getBytes("8859_1"), "EUC-KR"));	    		
-				buf.append('=');				
-				//buf.append(java.net.URLEncoder.encode(value));
-				buf.append(new String(value.getBytes("8859_1"), "EUC-KR"));				
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
-			*/
-			//System.out.println("## �씤肄붾뵫 key==> "+key);
-	    //	System.out.println("## �씤肄붾뵫 value ==> "+value);
-	    	//log.info("##[FileDownloadView] ==> value : " + value);
+			}	    	
 	    }
 	    System.out.println("## encoding ==> "+System.getProperty("file.encoding"));
 	   
@@ -184,7 +156,7 @@ public class StringUtil {
 
 	
 	/**
-	 * �뀈�룄 由ъ뒪�듃
+	 * 년도 리스트
 	 * @param start
 	 * @param end
 	 * @param seed
@@ -213,7 +185,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * String[]�삎�쓣 String�삎�쑝濡�
+	 * String[]형을 String형으로
 	 * @param obj
 	 * @return returnStr
 	 * @throws Exception
@@ -236,7 +208,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * Xss  �븘�꽣 �쟻�슜
+	 * Xss  필터 적용
 	 * @param obj
 	 * @return returnStr
 	 * @throws Exception
@@ -261,8 +233,9 @@ public class StringUtil {
 	     return value;   
 
 	 } 
+
 	/**
-	 * 媛믪껜�겕 鍮덈Ц�옄�씠嫄곕굹 null 媛앹껜�씤 寃쎌슦 鍮덈Ц�옄 諛섑솚
+	 * 값체크 빈문자이거나 null 객체인 경우 빈문자 반환
 	 * @param obj
 	 * @return returnStr
 	 * @throws Exception

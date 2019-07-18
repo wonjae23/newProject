@@ -3,6 +3,11 @@
 
 <script>
 	$(document).ready(function(){
+		if (getCookie("id")) { // getCookie함수로 id라는 이름의 쿠키를 불러와서 있을경우
+		    $("#userId").val(getCookie("id")); //input 이름이 id인곳에 getCookie("id")값을 넣어줌
+            $("#idsave").attr("checked", true);
+        }
+         
 		$("#btnLogin").click(function(){
 			var userId = $("#userId").val();
 			var userPw = $("#userPw").val();
@@ -19,62 +24,40 @@
 				return;
 			}
 			
+			if($("#idsave").is(":checked")){ // 아이디 저장을 체크 하였을때
+			    setCookie("id", $("#userId").val(), 7); //쿠키이름을 id로 아이디입력필드값을 7일동안 저장
+	        } else { // 아이디 저장을 체크 하지 않았을때
+	            setCookie("id", $("#userId").val(), 0); //날짜를 0으로 저장하여 쿠키삭제
+	        }
+			 
 			document.form1.action="${path}/main/loginCheck"
 			document.form1.submit();
 		});
 		
-		var userInputId = getCookie("userInputId");//저장된 쿠기값 가져오기
-	    $("input[name='id']").val(userInputId); 
-	     
-	    if($("input[name='id']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩
-	                                           // 아이디 저장하기 체크되어있을 시,
-	        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
-	    }
-	     
-	    $("#idSaveCheck").change(function(){ // 체크박스에 변화가 발생시
-	        if($("#idSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-	            var userInputId = $("input[name='id']").val();
-	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-	        }else{ // ID 저장하기 체크 해제 시,
-	            deleteCookie("userInputId");
-	        }
-	    });
-	     
-	    // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
-	    $("input[name='id']").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
-	        if($("#idSaveCheck").is(":checked")){ // ID 저장하기를 체크한 상태라면,
-	            var userInputId = $("input[name='id']").val();
-	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-	        }
-	    });
+		  
+		
 	});
 	
-	function setCookie(cookieName, value, exdays){
-	    var exdate = new Date();
-	    exdate.setDate(exdate.getDate() + exdays);
-	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-	    document.cookie = cookieName + "=" + cookieValue;
-	}
-	 
-	function deleteCookie(cookieName){
-	    var expireDate = new Date();
-	    expireDate.setDate(expireDate.getDate() - 1);
-	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-	}
-	 
-	function getCookie(cookieName) {
-	    cookieName = cookieName + '=';
-	    var cookieData = document.cookie;
-	    var start = cookieData.indexOf(cookieName);
-	    var cookieValue = '';
-	    if(start != -1){
-	        start += cookieName.length;
-	        var end = cookieData.indexOf(';', start);
-	        if(end == -1)end = cookieData.length;
-	        cookieValue = cookieData.substring(start, end);
-	    }
-	    return unescape(cookieValue);
-	}
+	function setCookie(name, value, expiredays){ //쿠키 저장함수
+        var todayDate = new Date();
+        todayDate.setDate(todayDate.getDate() + expiredays);
+        document.cookie = name + "=" + escape(value) + "; path=/; expires="
+                + todayDate.toGMTString() + ";"
+    }
+ 
+    function getCookie(Name) { // 쿠키 불러오는 함수
+        var search = Name + "=";
+        if (document.cookie.length > 0) {
+            offset = document.cookie.indexOf(search);
+            if (offset != -1) {
+                offset += search.length;
+                end = document.cookie.indexOf(";", offset);
+                if (end == -1)
+                    end = document.cookie.length;
+                return unescape(document.cookie.substring(offset, end));
+            }
+        }
+    }
 </script>
 
 <div class="container">
@@ -110,7 +93,7 @@
 
 		<div class="row omb_row-sm-offset-3">
 			<div class="col-xs-12 col-sm-6">	
-			    <form class="omb_loginForm"  autocomplete="off" method="POST" name="form1">
+			    <form class="omb_loginForm"  autocomplete="off" method="POST" name="form1" id="form1">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
 						<input type="text" class="form-control" name="userId" id="userId" placeholder="Id">
@@ -135,7 +118,7 @@
 		<div class="row omb_row-sm-offset-3">
 			<div class="col-xs-12 col-sm-3">
 				<label class="checkbox">
-					<input type="checkbox" value="remember-me" id="idSaveCheck">Remember Me
+					<input type="checkbox" value="remember-me" id="idsave" name="idsave">Remember Me
 				</label>
 			</div>
 			<div class="col-xs-12 col-sm-3">
@@ -146,20 +129,5 @@
 		</div>	    	
 	</div>
 </div>
-	
 
 <%@ include file="/WEB-INF/views/common/popup_footer.jsp"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

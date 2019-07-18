@@ -48,8 +48,7 @@ public class RootConfig {
         dataSource.setInitialSize(10);
         dataSource.setMaxTotal(500);
         dataSource.setMinIdle(10);
-        dataSource.setMaxWaitMillis(5000);     
-              
+        dataSource.setMaxWaitMillis(5000);                   
         dataSource.setTestWhileIdle(true);       
         dataSource.setTestOnBorrow(true);
         dataSource.setTestOnReturn(true);     
@@ -64,7 +63,6 @@ public class RootConfig {
 		sqlSessionFactoryBean.setDataSource(dataSource());
         /*sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mapper/mybatis-config.xml"));*/
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/**/*Mapper.xml"));
-        
        
         return sqlSessionFactoryBean.getObject();
 	}    

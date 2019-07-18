@@ -2,13 +2,21 @@ package com.won.project.domain;
 
 public class Board {
 	
+	private String rn;
 	private String id;
     private String subject;
     private String content;
     private String writer;
     private String register_datetime;
      
-    public String getId() {
+    
+    public String getRn() {
+		return rn;
+	}
+	public void setRn(String rn) {
+		this.rn = rn;
+	}
+	public String getId() {
         return id;
     }
     public void setId(String id) {

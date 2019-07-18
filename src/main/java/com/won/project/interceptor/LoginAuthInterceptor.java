@@ -12,17 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.won.project.common.MessageViewer;
 
-/**
- * Class Name : LoginAuthInterceptor
- * Description : Login Authentication interceptor
- * Modification Information
- * Date			    Autor					Contents
- * -----------  --------------  --------------------------------
- * 2019.04.26   pwj	 	    	
- * 
- * @author: pwj
- * @version: 1.0
-*/
+//로그인으로 이동시키는 인터셉터
 public class LoginAuthInterceptor implements HandlerInterceptor  {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());		
@@ -46,9 +36,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor  {
 		}else{
 		   	return true;
 		}
-		
-		//return true;
-    }
+	 }
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
